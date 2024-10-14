@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> NSLookup Tool</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="loader-container">
+            <div class="loader"></div>
+        </div>
+        
+        <div class="main-content">
+            <h1>NSLookup </h1>
+            <form method="POST">
+                <input type="text" name="domain" placeholder="Enter domain" required>
+                <button type="submit">Lookup</button>
+            </form>
+
+            {% if result %}
+                <div class="result-section">
+                    {% if result.error %}
+                        <p class="error">{{ result.error }}</p>
+                    {% else %}
+                        <p><strong>Domain:</strong> {{ result.domain }}</p>
+                        <p><strong>IP Address:</strong> {{ result.ip }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            document.querySelector('.loader-container').style.display = 'none';
+            document.querySelector('.main-content').style.display = 'block';
+        };
+    </script>
+</body>
+</html>
